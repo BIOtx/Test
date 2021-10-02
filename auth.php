@@ -1,7 +1,7 @@
 <?php
 
 function logger($message, $status = 'error'){
-  file_put_contents(__DIR__.'/logs/register.log', $message."\r\n", FILE_APPEND | LOCK_EX);
+  file_put_contents(__DIR__.'/logs/register.log', '['.date('d.m.Y H:i').'] '. $message."\r\n", FILE_APPEND | LOCK_EX);
   echo json_encode(array($status => $message), true);
   die();
 }
@@ -30,4 +30,4 @@ foreach($users as $item){
     }
 }
 
-logger('Поздравляем с успешной регистрацией!', 'success');
+logger('Зарегестрирован пользователь ('.trim($_POST['email']).', '.trim($_POST['firstname']).', '.trim($_POST['lastname']).')', 'success');
