@@ -12,6 +12,16 @@ $(document).ready(function(){
         data[name] = value;
     }
     $('#error').text('');
+    
+    if(!('email' in data) || !data['email'].includes('@')){
+      $('#error').text('Введите корректный email!');
+      return false;
+    }
+
+    if(!('password' in data) || !('confirmPassword' in data) || data['password'] !== data['confirmPassword']){
+      $('#error').text('Пароли должны совпадать!');
+      return false;
+    }
 
     /*ajax запрос на файл обработчик auth.php*/
     $.ajax({
